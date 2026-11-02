@@ -1,0 +1,10 @@
+# Ignore KVM Images and Disks
+images/
+*.qcow2
+*.img
+# Ignore auto-generated cloud-init files
+user-data-*.yaml
+
+# Ignore SSH keys if generated locally in this folder
+*.key
+*.pem
