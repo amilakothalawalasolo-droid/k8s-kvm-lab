@@ -10,12 +10,10 @@ for WORKER in "${WORKERS[@]}"; do
     echo ">>> Configuring Storage on $WORKER"
     ssh -o StrictHostKeyChecking=no amila@$WORKER << 'SSHEOF'
     
-    # අත්‍යවශ්‍ය පැකේජ ස්ථාපනය (iscsi අනිවාර්ය වේ)
     sudo apt-get update >/dev/null
     sudo apt-get install -y open-iscsi nfs-common
     sudo systemctl enable --now iscsid
 
-    # 20GB අමතර ඩිස්ක් එක (/dev/vdb) format කර mount කිරීම
     if ! grep -q "/var/lib/longhorn" /etc/fstab; then
         echo "Formatting and mounting /dev/vdb..."
         sudo mkfs.ext4 /dev/vdb
